@@ -7,7 +7,7 @@ users:
   - name: ${github_user}
     ssh_import_id:
       - gh:${github_user}
-    shell: /usr/bin/zsh
+    shell: /usr/bin/bash
     groups:
       - sudo
       - users
@@ -34,9 +34,19 @@ packages:
   - docker-ce-cli
   - kubectl
 
-  - zsh
   - git
   - build-essential
+  - zip
+  - zlib1g-dev
+  - jq
 
 runcmd:
   - tailscale up -authkey ${tailscale_auth_key}
+  - su - ${github_user} -c 'curl -s "https://get.sdkman.io" | bash'
+  - su - ${github_user} -c 'source "$HOME/.sdkman/bin/sdkman-init.sh"'
+  - su - ${github_user} -c 'sdk install java 22.0.0.2.r17-grl'
+
+chpasswd:
+  list: |
+     ${github_user}:bootiful
+  expire: True
