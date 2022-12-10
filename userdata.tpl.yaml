@@ -44,7 +44,7 @@ runcmd:
   - tailscale up -authkey ${tailscale_auth_key}
   - su - ${github_user} -c 'curl -s "https://get.sdkman.io" | bash'
   - su - ${github_user} -c 'source "$HOME/.sdkman/bin/sdkman-init.sh"'
-  - su - ${github_user} -c 'sdk install java 22.0.0.2.r17-grl'
+  - su - ${github_user} -c 'sdk install java 22.3.r17-grl'
 
 chpasswd:
   list: |
